@@ -41,6 +41,8 @@ export default function ThumbnailViewer({
     if (type === THUMBNAIL_TYPE.color) return color;
   };
 
+  const nl2br = (text: string) => text.replaceAll('\n', '<br />');
+
   return (
     <AspectRatio ratio={630 / 1260}>
       <Box
@@ -74,9 +76,8 @@ export default function ThumbnailViewer({
                   color: titleColor,
                   fontSize: titleSize,
                 }}
-              >
-                {title}
-              </Typography>
+                dangerouslySetInnerHTML={{ __html: nl2br(title || '') }}
+              />
             )}
             {showSubText && (
               <Typography
@@ -85,9 +86,8 @@ export default function ThumbnailViewer({
                   color: subTextColor,
                   fontSize: subTextSize,
                 }}
-              >
-                {subText}
-              </Typography>
+                dangerouslySetInnerHTML={{ __html: nl2br(subText || '') }}
+              />
             )}
           </Box>
         </Box>
