@@ -1,18 +1,21 @@
 'use client';
 
-import { ThumbnailControllerWithData } from '@/features/ControlThumbnail/ThumbnailControllerWithData';
-import { ThumbnailWithData } from '@/features/ShowThumbnail/ThumbnailWithData';
-import { Container } from '@/shared/components/Container';
+import ThumbnailViewerAndGenerator from '@/widgets/Thumbnail/ThumbnailViewerAndGenerator';
+import { Box, Container } from '@mui/material';
 
 export default function HomeScreen() {
   return (
     <Container>
-      <div className="h-svh flex flex-col items-center">
-        <div className="w-full flex flex-col gap-8 m-auto">
-          <ThumbnailWithData />
-          <ThumbnailControllerWithData />
-        </div>
-      </div>
+      <Box
+        sx={{ minHeight: '100svh' }}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+      >
+        <Box margin="auto" width="100%">
+          <ThumbnailViewerAndGenerator />
+        </Box>
+      </Box>
     </Container>
   );
 }

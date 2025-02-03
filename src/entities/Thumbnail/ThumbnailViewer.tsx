@@ -1,68 +1,97 @@
-import { AspectRatio } from '@/shared/shadcn/components/ui/aspect-ratio';
-import { FC } from 'react';
-import { BackgroundType } from './BackgroundType.type';
-import { BACKGROUND_TYPE } from './BackgroundType.constant';
+import { Box, Typography } from '@mui/material';
+import { THUMBNAIL_TYPE, ThumbnailType } from './ThumbnailType.constant';
+import { AspectRatio } from '@/shared/ui/AspectRatio';
 
 export type ThumbnailViewerProps = {
-  backgroundType?: BackgroundType;
-  backgroundColor?: string;
-  backgroundImage?: string;
-  backgroundGradient?: string;
-  showTitle?: boolean;
-  showSubText?: boolean;
-  titleColor: string;
-  titleText: string;
-  subTextColor: string;
-  subText: string;
-  padding?: string;
+  type: ThumbnailType;
+  color?: string;
+  image?: string;
+  gradient?: string;
+  title?: string;
+  subText?: string;
   titleSize?: string;
   subTextSize?: string;
+  titleColor?: string;
+  subTextColor?: string;
+  showTitle?: boolean;
+  showSubText?: boolean;
+  horizontalPadding?: string;
 };
 
-export const ThumbnailViewer: FC<ThumbnailViewerProps> = ({
-  backgroundType = BACKGROUND_TYPE.COLOR,
-  backgroundColor,
-  backgroundImage,
-  backgroundGradient,
-  showTitle = true,
-  showSubText = true,
-  titleText,
+export const THUMBNAIL_CONTAINER_ID = 'ThumbnailViewer';
+
+export default function ThumbnailViewer({
+  type,
+  color,
+  image,
+  gradient,
+  title,
+  subText,
   titleColor,
   subTextColor,
-  subText,
-  padding,
-  titleSize = '48px',
-  subTextSize = '24px',
-}) => {
-  const backgroundGradientStyle =
-    backgroundType === BACKGROUND_TYPE.GRADIENT ? `linear-gradient(to right, ${backgroundGradient})` : undefined;
+  titleSize,
+  subTextSize,
+  showTitle = true,
+  showSubText = true,
+  horizontalPadding = '24px',
+}: ThumbnailViewerProps) {
+  const getBackground = () => {
+    if (type === THUMBNAIL_TYPE.gradient) return gradient;
+    if (type === THUMBNAIL_TYPE.image) return `url(${image})`;
+    if (type === THUMBNAIL_TYPE.color) return color;
+  };
+
+  const nl2br = (text: string) => text.replaceAll('\n', '<br />');
 
   return (
-    <AspectRatio
-      id="thumbnail-viewer"
-      className={`overflow-hidden flex flex-col justify-center select-none bg-cover bg-center`}
-      ratio={16 / 9}
-      style={{
-        padding,
-        backgroundColor: backgroundType === BACKGROUND_TYPE.COLOR ? backgroundColor : undefined,
-        backgroundImage: backgroundType === BACKGROUND_TYPE.GRADIENT ? backgroundGradientStyle : backgroundImage,
-      }}
-    >
-      <div className="flex flex-col w-full gap-4">
-        {showTitle && (
-          <h3
-            className="font-bold"
-            dangerouslySetInnerHTML={{ __html: titleText.replace(/\n/g, '<br />') }}
-            style={{ color: titleColor, fontSize: titleSize }}
-          />
-        )}
-        {showSubText && (
-          <h6
-            style={{ color: subTextColor, fontSize: subTextSize }}
-            dangerouslySetInnerHTML={{ __html: subText.replace(/\n/g, '<br />') }}
-          />
-        )}
-      </div>
+    <AspectRatio ratio={630 / 1260}>
+      <Box
+        sx={{
+          width: '100%',
+          height: '100%',
+          boxShadow: 8,
+          userSelect: 'none',
+          overflow: 'hidden',
+        }}
+      >
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          id={THUMBNAIL_CONTAINER_ID}
+          sx={{
+            width: '100%',
+            height: '100%',
+            px: horizontalPadding,
+            background: getBackground(),
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+          }}
+        >
+          <Box display="flex" flexDirection="column" rowGap={4}>
+            {showTitle && (
+              <Typography
+                variant="h3"
+                sx={{
+                  color: titleColor,
+                  fontSize: titleSize,
+                }}
+                dangerouslySetInnerHTML={{ __html: nl2br(title || '') }}
+              />
+            )}
+            {showSubText && (
+              <Typography
+                variant="h6"
+                sx={{
+                  color: subTextColor,
+                  fontSize: subTextSize,
+                }}
+                dangerouslySetInnerHTML={{ __html: nl2br(subText || '') }}
+              />
+            )}
+          </Box>
+        </Box>
+      </Box>
     </AspectRatio>
   );
-};
+}
