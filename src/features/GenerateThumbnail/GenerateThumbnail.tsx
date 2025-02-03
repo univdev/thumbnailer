@@ -21,11 +21,15 @@ export const GenerateThumbnail = () => {
   return (
     <ThumbnailGenerator
       title={generateThumbnailStore.title}
+      titleColor={generateThumbnailStore.titleColor}
       subText={generateThumbnailStore.subText}
+      subTextColor={generateThumbnailStore.subTextColor}
       showTitle={generateThumbnailStore.showTitle}
       showSubText={generateThumbnailStore.showSubText}
       setTitle={generateThumbnailStore.setTitle}
+      setTitleColor={generateThumbnailStore.setTitleColor}
       setSubText={generateThumbnailStore.setSubText}
+      setSubTextColor={generateThumbnailStore.setSubTextColor}
       setShowTitle={generateThumbnailStore.setShowTitle}
       setShowSubText={generateThumbnailStore.setShowSubText}
       onGenerate={handleGenerate}

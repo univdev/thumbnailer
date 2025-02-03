@@ -7,15 +7,20 @@ import {
   Typography,
 } from '@mui/material';
 import { FC } from 'react';
+import { ColorPicker } from '@/shared/ui/ColorPicker';
 
 export type ThumbnailGeneratorProps = {
   title: string;
+  titleColor: string;
   subText: string;
+  subTextColor: string;
   showTitle: boolean;
   showSubText: boolean;
 
   setTitle: (title: string) => void;
+  setTitleColor: (titleColor: string) => void;
   setSubText: (subText: string) => void;
+  setSubTextColor: (subTextColor: string) => void;
   setShowTitle: (showTitle: boolean) => void;
   setShowSubText: (showSubText: boolean) => void;
   onGenerate: () => void;
@@ -23,11 +28,15 @@ export type ThumbnailGeneratorProps = {
 
 export const ThumbnailGenerator: FC<ThumbnailGeneratorProps> = ({
   title,
+  titleColor,
   subText,
+  subTextColor,
   showTitle,
   showSubText,
   setTitle,
+  setTitleColor,
   setSubText,
+  setSubTextColor,
   setShowTitle,
   setShowSubText,
   onGenerate,
@@ -39,10 +48,13 @@ export const ThumbnailGenerator: FC<ThumbnailGeneratorProps> = ({
           <Typography variant="body1" fontWeight="bold">
             제목
           </Typography>
-          <Switch
-            checked={showTitle}
-            onChange={() => setShowTitle(!showTitle)}
-          />
+          <Box display="flex" alignItems="center" rowGap={2}>
+            <ColorPicker value={titleColor} onChange={setTitleColor} />
+            <Switch
+              checked={showTitle}
+              onChange={() => setShowTitle(!showTitle)}
+            />
+          </Box>
         </Box>
         <Box width="100%">
           <TextField
@@ -59,10 +71,13 @@ export const ThumbnailGenerator: FC<ThumbnailGeneratorProps> = ({
           <Typography variant="body1" fontWeight="bold">
             부제목
           </Typography>
-          <Switch
-            checked={showSubText}
-            onChange={() => setShowSubText(!showSubText)}
-          />
+          <Box display="flex" alignItems="center" rowGap={2}>
+            <ColorPicker value={subTextColor} onChange={setSubTextColor} />
+            <Switch
+              checked={showSubText}
+              onChange={() => setShowSubText(!showSubText)}
+            />
+          </Box>
         </Box>
         <Box width="100%">
           <TextField
