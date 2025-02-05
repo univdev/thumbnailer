@@ -7,7 +7,7 @@ export default function HomeScreen() {
   return (
     <Container>
       <Box
-        sx={{ minHeight: '100svh' }}
+        sx={{ minHeight: '100svh', py: 24 }}
         display="flex"
         flexDirection="column"
         alignItems="center"

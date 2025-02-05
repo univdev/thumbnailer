@@ -46,6 +46,7 @@ export default function ThumbnailViewer({
   return (
     <AspectRatio ratio={630 / 1260}>
       <Box
+        id={THUMBNAIL_CONTAINER_ID}
         sx={{
           width: '100%',
           height: '100%',
@@ -58,7 +59,6 @@ export default function ThumbnailViewer({
           display="flex"
           flexDirection="column"
           justifyContent="center"
-          id={THUMBNAIL_CONTAINER_ID}
           sx={{
             width: '100%',
             height: '100%',

@@ -18,6 +18,12 @@ export const GenerateThumbnail = () => {
     });
   };
 
+  const handleUpdateHorizontalPadding = (horizontalPadding: number) => {
+    generateThumbnailStore.setHorizontalPadding(
+      `${horizontalPadding.toString()}px`,
+    );
+  };
+
   return (
     <ThumbnailGenerator
       title={generateThumbnailStore.title}
@@ -26,12 +32,14 @@ export const GenerateThumbnail = () => {
       subTextColor={generateThumbnailStore.subTextColor}
       showTitle={generateThumbnailStore.showTitle}
       showSubText={generateThumbnailStore.showSubText}
+      horizontalPadding={parseInt(generateThumbnailStore.horizontalPadding)}
       setTitle={generateThumbnailStore.setTitle}
       setTitleColor={generateThumbnailStore.setTitleColor}
       setSubText={generateThumbnailStore.setSubText}
       setSubTextColor={generateThumbnailStore.setSubTextColor}
       setShowTitle={generateThumbnailStore.setShowTitle}
       setShowSubText={generateThumbnailStore.setShowSubText}
+      setHorizontalPadding={handleUpdateHorizontalPadding}
       onGenerate={handleGenerate}
     />
   );

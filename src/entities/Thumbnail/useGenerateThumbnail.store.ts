@@ -12,7 +12,7 @@ const createGenerateThumbnailStore = (set: any) => {
     subTextFontSize: '18px',
     titleColor: '#a8ff30',
     subTextColor: '#a8ff30',
-    horizontalPadding: '48px',
+    horizontalPadding: '100px',
     showTitle: true,
     showSubText: true,
 
